@@ -4,10 +4,28 @@ import { CartContext } from "../context/CartContext";
 
 export default function Navbar() {
   const { totals } = useContext(CartContext);
+
+  const navStyle = {
+    display: "flex",
+    gap: "16px",
+    padding: "12px",
+    borderBottom: "1px solid #eee",
+    backgroundColor: "#fafafa"
+  };
+
+  const linkStyle = {
+    textDecoration: "none",
+    color: "#333",
+    fontWeight: "500"
+  };
+
   return (
-    <nav style={{ display: "flex", gap: 16, padding: 12, borderBottom: "1px solid #eee" }}>
-      <Link to="/">Home</Link>
-      <Link to="/cart">Cart ({totals.count})</Link>
+    <nav style={navStyle}>
+      <Link to="/" style={{ ...linkStyle, fontWeight: "bold" }}>MyShop</Link>
+      <Link to="/" style={linkStyle}>Home</Link>
+      <Link to="/cart" style={linkStyle}>
+        Cart ({totals?.count || 0})
+      </Link>
     </nav>
   );
 }

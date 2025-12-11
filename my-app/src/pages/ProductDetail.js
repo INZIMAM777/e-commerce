@@ -8,20 +8,38 @@ export default function ProductDetail() {
   const product = products.find((p) => String(p.id) === id);
   const { addToCart } = useContext(CartContext);
 
-  if (!product) return <p style={{ padding: 16 }}>Product not found.</p>;
+  const containerStyle = {
+    padding: "20px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "24px"
+  };
+
+  const buttonStyle = {
+    marginTop: "12px",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    padding: "10px 14px",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer"
+  };
+
+  if (!product) return <p style={{ padding: "20px" }}>Product not found.</p>;
 
   return (
-    <div style={{ padding: 16, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+    <div style={containerStyle}>
       <img
         src={product.image}
         alt={product.name}
-        style={{ width: "100%", maxWidth: 400, objectFit: "cover", borderRadius: 8 }}
-        onError={(e) => (e.currentTarget.style.display = "none")}
+        style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }}
       />
       <div>
         <h2>{product.name}</h2>
         <p>Price: ₹{product.price}</p>
-        <button onClick={() => addToCart(product)}>Add to cart</button>
+        <button style={buttonStyle} onClick={() => addToCart(product)}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );
